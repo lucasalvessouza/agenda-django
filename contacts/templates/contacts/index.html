@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h1 class="mt-5">Minha agenda</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Telefone</th>
+      <th>Categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contact in contacts %}
+      <tr>
+        <td>{{ contact.id }}</td>
+        <td>
+          <a href="{% url 'detail' contact_id=contact.id %}">{{ contact.name }}</a>
+        </td>
+        <td>{{ contact.last_name }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.category.name }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% for page in contacts.paginator.page_range %}
+      {% if contacts.number == page %}
+        <li class="page-item active">
+      {% else %}
+        <li class="page-item">
+      {% endif %}
+        <a class="page-link" href="?page={{page}}&term={{request.GET.term}}">{{ page }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+
+{% endblock %}
