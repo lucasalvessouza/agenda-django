@@ -22,11 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=8i!7vuu%9riiupm9n*ae1zs1evd70yzp4-4d%wd@3vavoq2(c'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['35.247.218.159']
-
 
 # Application definition
 
@@ -76,17 +71,6 @@ WSGI_APPLICATION = 'schedule.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sitedjango',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'USER': 'cursopython',
-        'PASSWORD': 'curs0Pyth0n@169'
-    }
-}
 
 
 # Password validation
@@ -148,3 +132,8 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'alert-success',
     constants.INFO: 'alert-info',
 }
+
+try:
+    from .local_settings import *
+except:
+    pass
